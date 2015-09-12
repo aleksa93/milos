@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IEPBazaModelStoreContainer" CdmEntityContainer="IEPBazaEntities12">
+    <EntitySetMapping Name="Kategorija">
+      <EntityTypeMapping TypeName="IEPBazaModel.Kategorija">
+        <MappingFragment StoreEntitySet="Kategorija">
+          <ScalarProperty Name="IDKategorija" ColumnName="IDKategorija" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korisnik">
+      <EntityTypeMapping TypeName="IEPBazaModel.Korisnik">
+        <MappingFragment StoreEntitySet="Korisnik">
+          <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+          <ScalarProperty Name="eMail" ColumnName="eMail" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="MailStize" ColumnName="MailStize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Narudzbina">
+      <EntityTypeMapping TypeName="IEPBazaModel.Narudzbina">
+        <MappingFragment StoreEntitySet="Narudzbina">
+          <ScalarProperty Name="IDNarudzbina" ColumnName="IDNarudzbina" />
+          <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+          <ScalarProperty Name="IDOglas" ColumnName="IDOglas" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Vreme" ColumnName="Vreme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oglas">
+      <EntityTypeMapping TypeName="IEPBazaModel.Oglas">
+        <MappingFragment StoreEntitySet="Oglas">
+          <ScalarProperty Name="IDOglas" ColumnName="IDOglas" />
+          <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+          <ScalarProperty Name="Kategorija" ColumnName="Kategorija" />
+          <ScalarProperty Name="Naslov" ColumnName="Naslov" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="LinkSlika" ColumnName="LinkSlika" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

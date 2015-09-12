@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IEPBazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kategorija">
+    <Key>
+      <PropertyRef Name="IDKategorija" />
+    </Key>
+    <Property Name="IDKategorija" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Oglas" Relationship="Self.FK_Oglas_Kategorija" FromRole="Kategorija" ToRole="Oglas" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="IDKorisnik" />
+    </Key>
+    <Property Name="IDKorisnik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="eMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Token" Type="Int32" />
+    <Property Name="MailStize" Type="Int32" />
+    <NavigationProperty Name="Narudzbina" Relationship="Self.FK_Narudzbina_Korisnik" FromRole="Korisnik" ToRole="Narudzbina" />
+    <NavigationProperty Name="Oglas" Relationship="Self.FK_Oglas_Korisnik" FromRole="Korisnik" ToRole="Oglas" />
+  </EntityType>
+  <EntityType Name="Narudzbina">
+    <Key>
+      <PropertyRef Name="IDNarudzbina" />
+    </Key>
+    <Property Name="IDNarudzbina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKorisnik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDOglas" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Vreme" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.FK_Narudzbina_Korisnik" FromRole="Narudzbina" ToRole="Korisnik" />
+    <NavigationProperty Name="Oglas" Relationship="Self.FK_Narudzbina_Oglas" FromRole="Narudzbina" ToRole="Oglas" />
+  </EntityType>
+  <EntityType Name="Oglas">
+    <Key>
+      <PropertyRef Name="IDOglas" />
+    </Key>
+    <Property Name="IDOglas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKorisnik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDKategorija" Type="Int32" Nullable="false" />
+    <Property Name="Naslov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cena" Type="Int32" Nullable="false" />
+    <Property Name="Kolicina" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kategorija" Relationship="Self.FK_Oglas_Kategorija" FromRole="Oglas" ToRole="Kategorija" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.FK_Oglas_Korisnik" FromRole="Oglas" ToRole="Korisnik" />
+    <NavigationProperty Name="Narudzbina" Relationship="Self.FK_Narudzbina_Oglas" FromRole="Oglas" ToRole="Narudzbina" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Oglas_Kategorija">
+    <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+    <End Role="Oglas" Type="Self.Oglas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategorija">
+        <PropertyRef Name="IDKategorija" />
+      </Principal>
+      <Dependent Role="Oglas">
+        <PropertyRef Name="IDKategorija" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Narudzbina_Korisnik">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="IDKorisnik" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="IDKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oglas_Korisnik">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Oglas" Type="Self.Oglas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="IDKorisnik" />
+      </Principal>
+      <Dependent Role="Oglas">
+        <PropertyRef Name="IDKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Narudzbina_Oglas">
+    <End Role="Oglas" Type="Self.Oglas" Multiplicity="1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oglas">
+        <PropertyRef Name="IDOglas" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="IDOglas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IEPBazaEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kategorija" EntityType="Self.Kategorija" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" />
+    <EntitySet Name="Narudzbina" EntityType="Self.Narudzbina" />
+    <EntitySet Name="Oglas" EntityType="Self.Oglas" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Oglas_Kategorija" Association="Self.FK_Oglas_Kategorija">
+      <End Role="Kategorija" EntitySet="Kategorija" />
+      <End Role="Oglas" EntitySet="Oglas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Narudzbina_Korisnik" Association="Self.FK_Narudzbina_Korisnik">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Narudzbina" EntitySet="Narudzbina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oglas_Korisnik" Association="Self.FK_Oglas_Korisnik">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Oglas" EntitySet="Oglas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Narudzbina_Oglas" Association="Self.FK_Narudzbina_Oglas">
+      <End Role="Oglas" EntitySet="Oglas" />
+      <End Role="Narudzbina" EntitySet="Narudzbina" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(IEPBazaModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(IEPBazaModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

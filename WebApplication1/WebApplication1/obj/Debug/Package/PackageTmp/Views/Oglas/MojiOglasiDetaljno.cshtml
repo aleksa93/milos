@@ -1,0 +1,79 @@
+﻿@model WebApplication1.Models.Oglas
+
+@{
+    ViewBag.Title = "Detalji oglasa";
+}
+
+<h2>Detalji oglasa</h2>
+
+<div>
+    <h4>Oglas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dd>
+            <br />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            Preostala kolicina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kolicina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Mesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Mesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Telefon)
+        </dd>
+
+        <dt>
+            Link ka slici
+        </dt>
+
+        <dd>
+            <a href=@Html.DisplayFor(model => model.LinkSlika)>@Html.DisplayFor(model => model.LinkSlika)</a>
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Nazad", "MojiOglasi")
+</p>

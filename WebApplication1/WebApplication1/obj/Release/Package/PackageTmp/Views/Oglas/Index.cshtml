@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.Oglas>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Oglasi";
+}
+
+<h2>Oglasi</h2>
+
+    @using (Html.BeginForm("Index", "Oglas", FormMethod.Get))
+    {
+        <p>
+            Pretraga po naslovu ili opisu oglasa: @Html.TextBox("SearchString1", ViewBag.CurrentFilter1 as string)
+        </p>
+        <p>
+            Pretraga po ceni: od @Html.TextBox("SearchString2", ViewBag.CurrentFilter2 as string) do @Html.TextBox("SearchString3", ViewBag.CurrentFilter3 as string)
+        </p>
+        <p>
+            <input type="submit" value="Pretraži" />
+            <button onclick="jQuery:Reset()">Resetuj</button>
+        </p>
+    }
+
+    <script>
+        function Reset() {
+            document.getElementById("SearchString1").setAttribute("value", "");
+            document.getElementById("SearchString2").setAttribute("value", "");
+            document.getElementById("SearchString3").setAttribute("value", "");
+        }
+    </script>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Kategorija", "Index", new { sortOrder = ViewBag.KategorijaSortParm, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, currentFilter3 = ViewBag.CurrentFilter3 })
+            </th>
+            <th>
+                Naslov
+            </th>
+            <th>
+                Opis oglasa
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Količina
+            </th>
+            <th>
+                @Html.ActionLink("Datum postavljanja", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th>
+                Slika
+            </th>
+            <th>
+                Detaljnije
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategorija)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naslov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kolicina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    <a href=@item.LinkSlika>Slika</a> 
+                </td>
+                <td>
+                    @Html.ActionLink("Detaljnije", "OglasDetalji", new { id = item.IDOglas })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, currentFilter3 = ViewBag.CurrentFilter3 }))

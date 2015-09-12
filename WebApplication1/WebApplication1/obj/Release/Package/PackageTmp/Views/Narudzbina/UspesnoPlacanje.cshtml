@@ -1,0 +1,13 @@
+﻿@model WebApplication1.Models.Narudzbina
+
+@{
+    ViewBag.Title = "Uspešna kupovina";
+}
+
+<h3>Uspešno ste izvršili kupovinu @Model.ID</h3>
+
+@Html.Partial("Details", Model)
+
+<p>
+    @Html.ActionLink("Nazad na oglase", "Index")
+</p>

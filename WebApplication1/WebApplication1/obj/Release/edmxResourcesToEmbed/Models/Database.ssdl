@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IEPBazaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategorija">
+    <Key>
+      <PropertyRef Name="IDKategorija" />
+    </Key>
+    <Property Name="IDKategorija" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Opis" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="IDKorisnik" />
+    </Key>
+    <Property Name="IDKorisnik" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="eMail" Type="varchar" MaxLength="50" />
+    <Property Name="Ime" Type="varchar" MaxLength="50" />
+    <Property Name="Prezime" Type="varchar" MaxLength="50" />
+    <Property Name="Mesto" Type="varchar" MaxLength="50" />
+    <Property Name="Adresa" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" />
+    <Property Name="Token" Type="int" />
+    <Property Name="MailStize" Type="int" />
+  </EntityType>
+  <EntityType Name="Narudzbina">
+    <Key>
+      <PropertyRef Name="IDNarudzbina" />
+    </Key>
+    <Property Name="IDNarudzbina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDKorisnik" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDOglas" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Vreme" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Oglas">
+    <Key>
+      <PropertyRef Name="IDOglas" />
+    </Key>
+    <Property Name="IDOglas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDKorisnik" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Kategorija" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Naslov" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Opis" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cena" Type="int" Nullable="false" />
+    <Property Name="Kolicina" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+    <Property Name="LinkSlika" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_Narudzbina_Korisnik">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="IDKorisnik" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="IDKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Narudzbina_Oglas">
+    <End Role="Oglas" Type="Self.Oglas" Multiplicity="1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oglas">
+        <PropertyRef Name="IDOglas" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="IDOglas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oglas_Korisnik">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Oglas" Type="Self.Oglas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="IDKorisnik" />
+      </Principal>
+      <Dependent Role="Oglas">
+        <PropertyRef Name="IDKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IEPBazaModelStoreContainer">
+    <EntitySet Name="Kategorija" EntityType="Self.Kategorija" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Narudzbina" EntityType="Self.Narudzbina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oglas" EntityType="Self.Oglas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Narudzbina_Korisnik" Association="Self.FK_Narudzbina_Korisnik">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Narudzbina" EntitySet="Narudzbina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Narudzbina_Oglas" Association="Self.FK_Narudzbina_Oglas">
+      <End Role="Oglas" EntitySet="Oglas" />
+      <End Role="Narudzbina" EntitySet="Narudzbina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oglas_Korisnik" Association="Self.FK_Oglas_Korisnik">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Oglas" EntitySet="Oglas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

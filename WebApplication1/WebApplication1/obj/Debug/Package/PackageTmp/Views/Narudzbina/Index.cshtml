@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.Narudzbina>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Moje narudzbine";
+}
+
+<h2>Moje narudzbine</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Naslov oglasa
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Posednja promena statusa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oglas.Naslov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vreme)
+            </td>
+            <td>
+                @Html.ActionLink("Detalji", "Detalji", new { id = item.IDNarudzbina })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+

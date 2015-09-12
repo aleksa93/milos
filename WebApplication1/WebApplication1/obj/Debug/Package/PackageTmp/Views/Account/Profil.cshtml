@@ -1,0 +1,83 @@
+﻿@using WebApplication1.Models;
+@model WebApplication1.Models.Korisnik
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Vas profil";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailStize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailStize)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Izmeni podatke", "IzmeniPodatke", "Korisnik") |
+        @Html.ActionLink("Promeni lozinku", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

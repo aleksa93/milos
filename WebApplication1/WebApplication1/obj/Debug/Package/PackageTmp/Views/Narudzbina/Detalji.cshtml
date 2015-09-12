@@ -1,0 +1,108 @@
+﻿@model WebApplication1.Models.Narudzbina
+
+
+@{
+    ViewBag.Title = "Detalji";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Narudzbina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Identifikator narudzbine
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDNarudzbina)
+        </dd>
+
+        <dt>
+            Trenutni status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            Vreme promene statusa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vreme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Oglas.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Oglas.Cena)
+        </dd>
+
+        <dt>
+            Preostala kolicina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Oglas.Kolicina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Mesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Mesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Telefon)
+        </dd>
+
+        <dt>
+            Link ka slici
+        </dt>
+
+        <dd>
+            <a href=@Html.DisplayFor(model => model.Oglas.LinkSlika)>@Html.DisplayFor(model => model.Oglas.LinkSlika)</a>
+        </dd>
+
+    </dl>
+</div>
+
+@if (Model.Status.Contains("Cekanje"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <a id="c-mobile-payment-widget" href="http://demo.centili.com/widget/WidgetModule?api=71830ab2ebadd40c28da3e489542cfd7&clientId=@Model.IDNarudzbina"><img src="https://www.centili.com/images/centili-widget-button.png" /></a>
+    </p>
+}
+
+    <p>
+        @Html.ActionLink("Izvezi u PDF", "izveziUPdf", new { id = Model.IDNarudzbina }) |
+        @Html.ActionLink("Nazad", "Index")
+    </p>

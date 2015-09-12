@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Oglasi", "Index", "Oglas")</li>
+        <li>@Html.ActionLink("Moji oglasi", "MojiOglasi", "Oglas")</li>
+        <li>@Html.ActionLink("Moje narudzbine", "Index", "Narudzbina")</li>
+    </ul>
+
+}
+else
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Oglasi", "Index", "Oglas")</li>
+    </ul>
+}
